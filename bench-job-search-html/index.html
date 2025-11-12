@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bench Job Search - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Header 1: Site updates bar -->
+  <div class="bg-indigo-600 text-white text-sm py-2 px-4">
+    <p class="text-center">Site updates: New jobs added weekly. Employees can update their learnings from the Employees page.</p>
+  </div>
+
+  <!-- Header 2: Nav bar -->
+  <header class="bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-2">
+        <div class="h-9 w-9 rounded-md bg-indigo-600 text-white flex items-center justify-center font-bold">BJ</div>
+        <span class="font-semibold text-lg">Bench Job Search</span>
+      </a>
+      <nav class="space-x-6">
+        <a href="index.html" class="text-indigo-600 font-medium">Home</a>
+        <a href="employees.html" class="hover:text-indigo-600">Employees</a>
+        <a href="jobs.html" class="hover:text-indigo-600">Jobs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Section 1: Stats 3 x 1 -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white rounded-lg shadow-sm p-6">
+        <h3 class="text-sm text-gray-500">Total number of employees</h3>
+        <p id="employeeCount" class="text-3xl font-bold mt-2">0</p>
+        <a href="employees.html" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded-md">View employees</a>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm p-6">
+        <h3 class="text-sm text-gray-500">Total number of jobs</h3>
+        <p id="jobCount" class="text-3xl font-bold mt-2">0</p>
+        <a href="jobs.html" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded-md">View jobs</a>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm p-6">
+        <h3 class="text-sm text-gray-500">Remaining days</h3>
+        <p id="remainingDays" class="text-3xl font-bold mt-2">30</p>
+        <button class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md" onclick="updateRemaining()">Update counter</button>
+      </div>
+    </section>
+
+    <!-- Section 2: Available jobs card view 4 x 2 -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold">Available jobs</h2>
+        <a href="jobs.html" class="text-indigo-600 hover:underline">View all jobs</a>
+      </div>
+      <div id="jobsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Cards injected via JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t mt-12">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between">
+      <p class="text-sm text-gray-500">© 2025 Bench Job Search</p>
+      <div class="space-x-6 text-sm">
+        <a href="index.html" class="hover:text-indigo-600">Home</a>
+        <a href="employees.html" class="hover:text-indigo-600">Employees</a>
+        <a href="jobs.html" class="hover:text-indigo-600">Jobs</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sample JSON data -->
+  <script>
+    const jobsData = [
+      {
+        id: 1,
+        tag: "Full Time",
+        title: "Frontend Developer",
+        company: "TechNova",
+        location: "Hyderabad, India",
+        salary: "₹14,00,000",
+        description: "Build responsive UI with React and Tailwind.",
+        status: "active"
+      },
+      {
+        id: 2,
+        tag: "Part Time",
+        title: "UI Designer",
+        company: "Designly",
+        location: "Remote",
+        salary: "₹8,00,000",
+        description: "Create modern UI components and design systems.",
+        status: "active"
+      },
+      {
+        id: 3,
+        tag: "Full Time",
+        title: "Backend Engineer",
+        company: "DataForge",
+        location: "Bangalore, India",
+        salary: "₹18,00,000",
+        description: "Work on Node.js microservices and APIs.",
+        status: "inactive"
+      },
+      {
+        id: 4,
+        tag: "Part Time",
+        title: "QA Tester",
+        company: "QualityPlus",
+        location: "Pune, India",
+        salary: "₹6,50,000",
+        description: "Manual and automated testing for web apps.",
+        status: "active"
+      },
+      {
+        id: 5,
+        tag: "Full Time",
+        title: "Product Manager",
+        company: "GrowthLabs",
+        location: "Mumbai, India",
+        salary: "₹24,00,000",
+        description: "Drive product discovery and delivery.",
+        status: "active"
+      },
+      {
+        id: 6,
+        tag: "Part Time",
+        title: "DevOps Engineer",
+        company: "CloudWay",
+        location: "Remote",
+        salary: "₹12,00,000",
+        description: "CI/CD, infrastructure as code, monitoring.",
+        status: "active"
+      },
+      {
+        id: 7,
+        tag: "Full Time",
+        title: "Data Analyst",
+        company: "InsightAI",
+        location: "Hyderabad, India",
+        salary: "₹10,00,000",
+        description: "Dashboards, SQL, and visualization.",
+        status: "inactive"
+      },
+      {
+        id: 8,
+        tag: "Full Time",
+        title: "Mobile Developer",
+        company: "AppWorks",
+        location: "Chennai, India",
+        salary: "₹16,00,000",
+        description: "Flutter/React Native apps.",
+        status: "active"
+      }
+    ];
+
+    const employeesData = [
+      { id: 101, name: "Ananya Rao", location: "Hyderabad", experience: "4.5 years", learnings: "React, Node.js", currentLearnings: "Next.js", onBench: true },
+      { id: 102, name: "Rahul Verma", location: "Pune", experience: "6 years", learnings: "Java, Spring", currentLearnings: "Kotlin", onBench: false },
+      { id: 103, name: "Simran Kaur", location: "Bangalore", experience: "3 years", learnings: "Python, Django", currentLearnings: "FastAPI", onBench: true },
+      { id: 104, name: "Vikram Singh", location: "Mumbai", experience: "8 years", learnings: "AWS, Terraform", currentLearnings: "Pulumi", onBench: false }
+    ];
+
+    // Initialize counts
+    document.getElementById('employeeCount').textContent = employeesData.length;
+    document.getElementById('jobCount').textContent = jobsData.length;
+
+    // Remaining days demo
+    function updateRemaining() {
+      const el = document.getElementById('remainingDays');
+      const current = parseInt(el.textContent, 10);
+      el.textContent = Math.max(current - 1, 0);
+    }
+
+    // Render job cards (only active jobs)
+    const jobsGrid = document.getElementById('jobsGrid');
+    jobsData
+      .filter(j => j.status === 'active')
+      .slice(0, 8)
+      .forEach(j => {
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-lg shadow-sm p-5 flex flex-col";
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs px-2 py-1 rounded-full ${j.tag === 'Full Time' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">${j.tag}</span>
+            <span class="text-xs ${j.status === 'active' ? 'text-green-600' : 'text-gray-500'}">${j.status}</span>
+          </div>
+          <h3 class="font-semibold text-lg">${j.title}</h3>
+          <p class="text-sm text-gray-600 mt-1">${j.company} • ${j.location}</p>
+          <p class="text-sm text-gray-800 mt-1">Salary: ${j.salary}</p>
+          <p class="text-sm text-gray-600 mt-2 line-clamp-3">${j.description}</p>
+          <a href="view-job.html?id=${j.id}" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded-md text-center">View details</a>
+        `;
+        jobsGrid.appendChild(card);
+      });
+  </script>
+</body>
+</html>

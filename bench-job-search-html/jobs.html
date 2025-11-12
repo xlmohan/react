@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>All Jobs - Bench Job Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="bg-indigo-600 text-white text-sm py-2 px-4 text-center">Browse all jobs below.</div>
+
+  <header class="bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-2">
+        <div class="h-9 w-9 rounded-md bg-indigo-600 text-white flex items-center justify-center font-bold">BJ</div>
+        <span class="font-semibold text-lg">Bench Job Search</span>
+      </a>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-indigo-600">Home</a>
+        <a href="employees.html" class="hover:text-indigo-600">Employees</a>
+        <a href="jobs.html" class="text-indigo-600 font-medium">Jobs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <section class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-semibold">All Jobs</h2>
+      <a href="add-job.html" class="px-4 py-2 bg-indigo-600 text-white rounded-md">Add Job</a>
+    </section>
+
+    <!-- Section 2: 4 x 4 cards -->
+    <section>
+      <div id="jobsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Cards injected via JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-white border-t mt-12">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
+      <p class="text-sm text-gray-500">© 2025 Bench Job Search</p>
+      <div class="space-x-6 text-sm">
+        <a href="index.html" class="hover:text-indigo-600">Home</a>
+        <a href="employees.html" class="hover:text-indigo-600">Employees</a>
+        <a href="jobs.html" class="hover:text-indigo-600">Jobs</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const jobsData = Array.from({ length: 16 }).map((_, i) => ({
+      id: i + 1,
+      tag: i % 2 === 0 ? "Full Time" : "Part Time",
+      title: `Role ${i + 1}`,
+      company: i % 3 === 0 ? "TechNova" : i % 3 === 1 ? "Designly" : "CloudWay",
+      location: i % 2 === 0 ? "Hyderabad, India" : "Remote",
+      salary: i % 2 === 0 ? "₹12,00,000" : "₹8,50,000",
+      description: "Sample job description showcasing responsibilities and requirements.",
+      status: i % 5 === 0 ? "inactive" : "active"
+    }));
+
+    const grid = document.getElementById('jobsGrid');
+    jobsData.forEach(j => {
+      const card = document.createElement('div');
+      card.className = "bg-white rounded-lg shadow-sm p-5 flex flex-col";
+      card.innerHTML = `
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs px-2 py-1 rounded-full ${j.tag === 'Full Time' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">${j.tag}</span>
+          <span class="text-xs ${j.status === 'active' ? 'text-green-600' : 'text-gray-500'}">${j.status}</span>
+        </div>
+        <h3 class="font-semibold text-lg">${j.title}</h3>
+        <p class="text-sm text-gray-600 mt-1">${j.company} • ${j.location}</p>
+        <p class="text-sm text-gray-800 mt-1">Salary: ${j.salary}</p>
+        <p class="text-sm text-gray-600 mt-2 line-clamp-3">${j.description}</p>
+        <a href="view-job.html?id=${j.id}" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded-md text-center">View details</a>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

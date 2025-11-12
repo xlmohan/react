@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Job - Bench Job Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="bg-indigo-600 text-white text-sm py-2 px-4 text-center">Job details and company info.</div>
+
+  <header class="bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-2">
+        <div class="h-9 w-9 rounded-md bg-indigo-600 text-white flex items-center justify-center font-bold">BJ</div>
+        <span class="font-semibold text-lg">Bench Job Search</span>
+      </a>
+      <nav class="space-x-6">
+        <a href="index.html" class="hover:text-indigo-600">Home</a>
+        <a href="employees.html" class="hover:text-indigo-600">Employees</a>
+        <a href="jobs.html" class="hover:text-indigo-600">Jobs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Section 1: 2 x 1 with left big, right small -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Left column: job details -->
+      <div class="lg:col-span-2 bg-white rounded-lg shadow-sm p-6">
+        <h2 id="jobTitle" class="text-2xl font-semibold">Job Title</h2>
+        <p id="jobMeta" class="text-sm text-gray-600 mt-1">Company • Location</p>
+        <div class="mt-2 flex items-center gap-3">
+          <span id="jobTag" class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-700">Tag</span>
+          <span id="jobStatus" class="text-xs text-green-600">active</span>
+          <span id="jobSalary" class="text-sm text-gray-800 ml-auto">Salary: ₹—</span>
+        </div>
+        <p id="jobDesc" class="mt-4 text-gray-700">Description will appear here.</p>
+
+        <div class="mt-6">
+          <a href="jobs.html" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md">Go back</a>
+        </div>
+      </div>
+
+      <!-- Right column: company info + actions -->
+      <aside class="bg-white rounded-lg shadow-sm p-6">
+        <h3 class="text-lg font-semibold">Company contact</h3>
+        <div class="mt-3 space-y-2">
+          <p class="text-sm"><span class="font-medium">Company email:</span> careers@example.com</p>
+          <p class="text-sm"><span class="font-medium">Company contact:</span> +91 98765 43210</p>
+        </div>
+        <div class="mt-6 space-y-2">
+          <a href="update-job.html?id=1" class="w-full inline-block text-center px-4 py-2 bg-indigo-600 text-white rounded-md">Update the job</a>
+          <button class="w-full px-4 py-2 bg-red-600 text-white rounded-md" onclick="alert('Job deleted (demo)')">Delete the job</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="bg-white border-t mt-12">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
+      <p class="text-sm text-gray-500">© 2025 Bench Job Search</p>
+      <div class="space-x-6 text-sm">
+        <a href="index.html" class="hover:text-indigo-600">Home</a>
+        <a href="employees.html" class="hover:text-indigo-600">Employees</a>
+        <a href="jobs.html" class="hover:text-indigo-600">Jobs</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const sampleJobs = [
+      { id: 1, tag: "Full Time", title: "Frontend Developer", company: "TechNova", location: "Hyderabad, India", salary: "₹14,00,000", description: "Build responsive UI with React and Tailwind.", status: "active" },
+      { id: 2, tag: "Part Time", title: "UI Designer", company: "Designly", location: "Remote", salary: "₹8,00,000", description: "Create modern UI components and design systems.", status: "active" }
+    ];
+
+    function getQueryId() {
+      const params = new URLSearchParams(window.location.search);
+      return Number(params.get('id') || 1);
+    }
+
+    function loadJob() {
+      const id = getQueryId();
+      const job = sampleJobs.find(j => j.id === id) || sampleJobs[0];
+
+      document.getElementById('jobTitle').textContent = job.title;
+      document.getElementById('jobMeta').textContent = `${job.company} • ${job.location}`;
+      const tagEl = document.getElementById('jobTag');
+      tagEl.textContent = job.tag;
+      tagEl.className = `text-xs px-2 py-1 rounded-full ${job.tag === 'Full Time' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`;
+      document.getElementById('jobStatus').textContent = job.status;
+      document.getElementById('jobStatus').className = `text-xs ${job.status === 'active' ? 'text-green-600' : 'text-gray-500'}`;
+      document.getElementById('jobSalary').textContent = `Salary: ${job.salary}`;
+      document.getElementById('jobDesc').textContent = job.description;
+    }
+    loadJob();
+  </script>
+</body>
+</html>

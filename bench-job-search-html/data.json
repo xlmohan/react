@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "tag": "Full Time",
+    "title": "Frontend Developer",
+    "company": "TechNova",
+    "location": "Hyderabad, India",
+    "salary": "₹14,00,000",
+    "description": "Build responsive UI with React and Tailwind.",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "tag": "Part Time",
+    "title": "UI Designer",
+    "company": "Designly",
+    "location": "Remote",
+    "salary": "₹8,00,000",
+    "description": "Create modern UI components and design systems.",
+    "status": "active"
+  }
+]
